@@ -21,10 +21,10 @@ const IconText = ({type, text}) => (
   </span>
 );
 
-class BooksPage extends React.Component {
+class BookListPage extends React.Component {
     static group = "book";
 
-    static keyName = "books";
+    static keyName = "book.list";
 
     render() {
         return (
@@ -60,4 +60,4 @@ class BooksPage extends React.Component {
     }
 }
 
-export default BooksPage;
+export default BookListPage;

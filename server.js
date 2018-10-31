@@ -14,6 +14,14 @@ app.prepare()
             return app.render(req, res, '/', req.query);
         });
 
+        server.get('/book/list', (req, res) => {
+            return app.render(req, res, '/book.list', req.query);
+        });
+        server.get('/book/create', (req, res) => {
+            return app.render(req, res, '/book.create', req.query);
+        });
+
+
         server.get('*', (req, res) => {
             return handle(req, res)
         });

@@ -12,7 +12,7 @@ const RadioGroup = Radio.Group;
 class BookCreatePage extends React.Component {
     static group = "book";
 
-    static keyName = "book-create";
+    static keyName = "book.create";
 
     constructor(props){
         super(props);

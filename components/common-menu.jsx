@@ -38,13 +38,13 @@ class CommonMenu extends React.Component {
             </span>
           }
         >
-          <Menu.Item key="books">
-            <Link prefetch href="/books">
+          <Menu.Item key="book.list">
+            <Link prefetch as={"/book/list"} href="/book.list">
               <a>全部书籍</a>
             </Link>
           </Menu.Item>
-          <Menu.Item key="book-create">
-            <Link prefetch href="/book-create">
+          <Menu.Item key="book.create">
+            <Link prefetch as={"/book/create"} href="/book.create">
               <a>创建书籍</a>
             </Link>
           </Menu.Item>
