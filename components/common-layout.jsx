@@ -48,7 +48,7 @@ class CommonLayout extends React.Component {
                     <Content style={{margin: "24px 24px", minHeight: 280}}>
                         {this.props.children}
                     </Content>
-                    <Footer style={{ textAlign: 'center', backgroundColor: '#f5f5f5' }}>
+                    <Footer style={{textAlign: 'center', backgroundColor: '#f5f5f5'}}>
                         Ant Design ©2018 Created by Ant UED
                     </Footer>
                 </Layout>
