@@ -34,20 +34,30 @@ class CommonMenu extends React.Component {
           title={
             <span>
               <Icon type="book" />
-                <span>书籍</span>
+                <span>漫画</span>
             </span>
           }
         >
           <Menu.Item key="book.list">
             <Link prefetch as={"/book/list"} href="/book.list">
-              <a>全部书籍</a>
+              <a>漫画列表</a>
             </Link>
           </Menu.Item>
           <Menu.Item key="book.create">
             <Link prefetch as={"/book/create"} href="/book.create">
-              <a>创建书籍</a>
+              <a>创建漫画</a>
             </Link>
           </Menu.Item>
+            <Menu.Item key="book.category.list">
+                <Link prefetch as={"/book/category/list"} href="/BookCategory/book.category.list">
+                    <a>分类列表</a>
+                </Link>
+            </Menu.Item>
+            <Menu.Item key="book.category.update">
+                <Link prefetch as={"/book/category/update"} href="/BookCategory/book.category.update">
+                    <a>创建分类</a>
+                </Link>
+            </Menu.Item>
         </SubMenu>
         <SubMenu
           key="user"

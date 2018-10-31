@@ -21,6 +21,13 @@ app.prepare()
             return app.render(req, res, '/book.create', req.query);
         });
 
+        server.get('/book/category/list', (req, res) => {
+            return app.render(req, res, '/BookCategory/book.category.list', req.query);
+        });
+        server.get('/book/category/update', (req, res) => {
+            return app.render(req, res, '/BookCategory/book.category.update', req.query);
+        });
+
 
         server.get('*', (req, res) => {
             return handle(req, res)
