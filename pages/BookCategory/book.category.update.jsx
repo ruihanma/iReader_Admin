@@ -45,7 +45,10 @@ class BookCategoryUpdatePage extends React.Component {
 
     this.state = {
       imageUrl: null,
-      loading: false
+      backgroundUrl: null,
+      loading: false,
+      fileList: [],
+      uploading: false
     };
   }
 
@@ -59,6 +62,7 @@ class BookCategoryUpdatePage extends React.Component {
   };
 
   handleChange = info => {
+    console.log("info", info);
     if (info.file.status === "uploading") {
       this.setState({ loading: true });
       return;
@@ -87,6 +91,38 @@ class BookCategoryUpdatePage extends React.Component {
       </div>
     );
     const imageUrl = this.state.imageUrl;
+    const { uploading, backgroundUrl } = this.state;
+    const props = {
+      action: "//jsonplaceholder.typicode.com/posts/",
+      onRemove: file => {
+          console.log('remove file', file)
+        this.setState(({ fileList }) => {
+          const index = fileList.indexOf(file);
+          const newFileList = fileList.slice();
+          newFileList.splice(index, 1);
+          return {
+            fileList: newFileList
+          };
+        });
+      },
+      beforeUpload: file => {
+        console.log("file", file);
+        this.setState(({ fileList }) => ({
+          fileList: [...fileList, file]
+        }));
+        return false;
+      },
+      onChange: info => {
+        console.log("info", info);
+        getBase64(info.fileList[info.fileList.length - 1].originFileObj, imageUrl =>
+          this.setState({
+            backgroundUrl: imageUrl,
+            loading: false
+          })
+        );
+      },
+      fileList: this.state.fileList
+    };
     return (
       <Form onSubmit={this.handleSubmit}>
         {/*分类名称*/}
@@ -101,18 +137,9 @@ class BookCategoryUpdatePage extends React.Component {
               {
                 max: 10,
                 message: "名称最长为10位"
-              },
-              {
-                pattern: `/\s/`,
-                message: "不能使用空格"
               }
             ]
-          })(
-            <Input
-              placeholder="请输入分类名称"
-              id="title"
-            />
-          )}
+          })(<Input placeholder="请输入分类名称" id="title" />)}
         </FormItem>
 
         <Divider dashed />
@@ -137,16 +164,14 @@ class BookCategoryUpdatePage extends React.Component {
         {/*背景图片*/}
         <FormItem {...formItemLayout} label="背景图片">
           {getFieldDecorator("background", {})(
-            <Upload
-              name="background"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={false}
-              action="//jsonplaceholder.typicode.com/posts/"
-              beforeUpload={beforeUpload}
-              onChange={this.handleChange}
-            >
-              {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
+            <Upload {...props}>
+              {backgroundUrl ? (
+                <img src={backgroundUrl} alt="avatar" />
+              ) : (
+                <Button>
+                  <Icon type="upload" /> Select File
+                </Button>
+              )}
             </Upload>
           )}
         </FormItem>
@@ -169,9 +194,9 @@ class BookCategoryUpdatePage extends React.Component {
           label="排序"
           help="默认100 数值越大越靠后"
         >
-          {getFieldDecorator("sort", { initialValue: 100 })(
-            <InputNumber min={1} max={10000} />
-          )}
+          {getFieldDecorator("sort", {
+            initialValue: 100
+          })(<InputNumber min={1} max={10000} />)}
         </FormItem>
 
         <Divider dashed />
@@ -189,7 +214,7 @@ class BookCategoryUpdatePage extends React.Component {
 
         <FormItem wrapperCol={{ span: 12, offset: 6 }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            提交
           </Button>
         </FormItem>
       </Form>
