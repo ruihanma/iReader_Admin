@@ -19,7 +19,7 @@ class CommonMenu extends React.Component {
           title={
             <span>
               <Icon type="dashboard" />
-              Dashboard
+                <span>Dashboard</span>
             </span>
           }
         >
@@ -34,7 +34,7 @@ class CommonMenu extends React.Component {
           title={
             <span>
               <Icon type="book" />
-              书籍
+                <span>书籍</span>
             </span>
           }
         >
@@ -43,8 +43,8 @@ class CommonMenu extends React.Component {
               <a>全部书籍</a>
             </Link>
           </Menu.Item>
-          <Menu.Item key="create-book">
-            <Link prefetch href="/create-book">
+          <Menu.Item key="book-create">
+            <Link prefetch href="/book-create">
               <a>创建书籍</a>
             </Link>
           </Menu.Item>
@@ -54,7 +54,7 @@ class CommonMenu extends React.Component {
           title={
             <span>
               <Icon type="user" />
-              用户
+                <span>用户</span>
             </span>
           }
         >
@@ -69,7 +69,7 @@ class CommonMenu extends React.Component {
           title={
             <span>
               <Icon type="robot" />
-              管理员
+                <span>管理员</span>
             </span>
           }
         >
