@@ -9,7 +9,7 @@ class BookCategoryListPage extends React.Component {
 
     render() {
         return <div>BookCategoryListPage</div>;
-    }
+    } 
 }
 
 export default BookCategoryListPage;

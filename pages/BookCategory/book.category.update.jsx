@@ -15,14 +15,10 @@ import {
   message
 } from "antd";
 
+import { getBase64 } from "../../static/utils";
+
 const FormItem = Form.Item;
 const { TextArea } = Input;
-
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
 
 function beforeUpload(file) {
   const isJPG = file.type === "image/jpeg";
@@ -44,14 +40,22 @@ class BookCategoryUpdatePage extends React.Component {
     super(props);
 
     this.state = {
-      imageUrl: null,
+      // 背景预览图url
       backgroundUrl: null,
-      loading: false,
+      backgroundList: [],
+      // 图标预览url
+      iconUrl: null,
+
       fileList: [],
+
+      imageUrl: null,
+
+      loading: false,
       uploading: false
     };
   }
 
+  // 处理提交
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -59,6 +63,29 @@ class BookCategoryUpdatePage extends React.Component {
         console.log("Received values of form: ", values);
       }
     });
+  };
+
+  // 处理 file 变化
+  handleOnChange = (info, url) => {
+    if (info.file && info.fileList.length > 0) {
+      // 过滤新的file
+      let target = info.fileList.filter(e => {
+        return e.uid === info.file.uid;
+      });
+      // 获取base64用于页面显示图片
+      getBase64(target[0].originFileObj, imageUrl => {
+        this.state[url] = imageUrl;
+        this.setState({
+          loading: false
+        });
+      });
+    }
+  };
+
+  // 处理 图片上传前
+  handleBeforeUpload = (fileList, file) => {
+    this.state[fileList] = [file];
+    return false;
   };
 
   handleChange = info => {
@@ -93,33 +120,39 @@ class BookCategoryUpdatePage extends React.Component {
     const imageUrl = this.state.imageUrl;
     const { uploading, backgroundUrl } = this.state;
     const props = {
-      action: "//jsonplaceholder.typicode.com/posts/",
+      action: "",
       onRemove: file => {
-          console.log('remove file', file)
+        // 移除现有的file
         this.setState(({ fileList }) => {
           const index = fileList.indexOf(file);
           const newFileList = fileList.slice();
           newFileList.splice(index, 1);
           return {
+            backgroundUrl: null,
             fileList: newFileList
           };
         });
       },
       beforeUpload: file => {
-        console.log("file", file);
-        this.setState(({ fileList }) => ({
-          fileList: [...fileList, file]
-        }));
+        // 设置新的fileList(单个file)
+        this.setState({ fileList: [file] });
         return false;
       },
       onChange: info => {
-        console.log("info", info);
-        getBase64(info.fileList[info.fileList.length - 1].originFileObj, imageUrl =>
-          this.setState({
-            backgroundUrl: imageUrl,
-            loading: false
-          })
-        );
+        this.handleOnChange(info, "backgroundUrl");
+        // if (info.file && info.fileList.length > 0) {
+        //   // 过滤新的file
+        //   let target = info.fileList.filter(e => {
+        //     return e.uid === info.file.uid;
+        //   });
+        //   // 获取base64用于页面显示图片
+        //   getBase64(target[0].originFileObj, imageUrl =>
+        //     this.setState({
+        //       backgroundUrl: imageUrl,
+        //       loading: false
+        //     })
+        //   );
+        // }
       },
       fileList: this.state.fileList
     };
