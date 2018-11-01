@@ -55,7 +55,7 @@ export default function request(url, options) {
     } else {
         url += "?" + queryString.stringify(mergedOptions.body);
     }
-    return fetch(`${env.API_SERVER}${url}`, reqOptions)
+    return fetch(`${url}`, reqOptions)
         .then(checkStatus)
         .then(response => response.json())
         .then(data => {

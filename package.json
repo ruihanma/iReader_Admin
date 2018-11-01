@@ -24,6 +24,7 @@
     "react-dom": "^16.6.0",
     "react-toastify": "^4.4.0",
     "styled-jsx-plugin-sass": "^0.3.0",
-    "unfetch": "^4.0.1"
+    "unfetch": "^4.0.1",
+    "universal-cookie": "^3.0.4"
   }
 }

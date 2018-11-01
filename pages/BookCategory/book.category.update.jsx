@@ -17,6 +17,8 @@ import {
   ALLOW_IMAGE_FORMAT_LIST,
   ALLOW_IMAGE_SIZE
 } from "../../static/utils/config";
+import API from "../../static/utils/api";
+import request from "../../static/utils/request";
 
 // 定义组件
 const FormItem = Form.Item;
@@ -192,6 +194,12 @@ class BookCategoryUpdatePage extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        request(API.base + API.book.category.update, {
+          method: "POST",
+          body: values
+        }).then(res => {
+          console.log("res", res);
+        });
       }
     });
   };
