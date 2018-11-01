@@ -77,7 +77,7 @@ class BookCategoryUpdatePage extends React.Component {
         this.state[url] = imageUrl;
         this.setState({
           loading: false
-        });
+        }, ()=>{console.log(this.state)});
       });
     }
   };
@@ -118,7 +118,7 @@ class BookCategoryUpdatePage extends React.Component {
       </div>
     );
     const imageUrl = this.state.imageUrl;
-    const { uploading, backgroundUrl } = this.state;
+    const { uploading, backgroundUrl, backgroundList } = this.state;
     const props = {
       action: "",
       onRemove: file => {
@@ -129,32 +129,19 @@ class BookCategoryUpdatePage extends React.Component {
           newFileList.splice(index, 1);
           return {
             backgroundUrl: null,
-            fileList: newFileList
+            backgroundList: newFileList
           };
         });
       },
       beforeUpload: file => {
         // 设置新的fileList(单个file)
-        this.setState({ fileList: [file] });
+        this.setState({ backgroundList: [file] });
         return false;
       },
       onChange: info => {
         this.handleOnChange(info, "backgroundUrl");
-        // if (info.file && info.fileList.length > 0) {
-        //   // 过滤新的file
-        //   let target = info.fileList.filter(e => {
-        //     return e.uid === info.file.uid;
-        //   });
-        //   // 获取base64用于页面显示图片
-        //   getBase64(target[0].originFileObj, imageUrl =>
-        //     this.setState({
-        //       backgroundUrl: imageUrl,
-        //       loading: false
-        //     })
-        //   );
-        // }
       },
-      fileList: this.state.fileList
+      fileList: this.state.backgroundList
     };
     return (
       <Form onSubmit={this.handleSubmit}>
