@@ -1,36 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   Form,
-  Select,
   InputNumber,
   Switch,
-  Radio,
-  Slider,
   Button,
   Upload,
   Icon,
-  Rate,
   Input,
   Divider,
   message
 } from "antd";
+// 工具
+import { GET_BASE64 } from "../../static/utils";
+// 配置信息
+import {
+  ALLOW_IMAGE_FORMAT_LIST,
+  ALLOW_IMAGE_SIZE
+} from "../../static/utils/config";
 
-import { getBase64 } from "../../static/utils";
-
+// 定义组件
 const FormItem = Form.Item;
 const { TextArea } = Input;
-
-function beforeUpload(file) {
-  const isJPG = file.type === "image/jpeg";
-  if (!isJPG) {
-    message.error("You can only upload JPG file!");
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
-  }
-  return isJPG && isLt2M;
-}
 
 class BookCategoryUpdatePage extends React.Component {
   static group = "book";
@@ -45,97 +35,57 @@ class BookCategoryUpdatePage extends React.Component {
       backgroundList: [],
       // 图标预览url
       iconUrl: null,
-
-      fileList: [],
-
-      imageUrl: null,
+      iconList: [],
 
       loading: false,
       uploading: false
     };
   }
 
-  // 处理提交
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log("Received values of form: ", values);
-      }
-    });
-  };
-
-  // 处理 file 变化
-  handleOnChange = (info, url) => {
-    if (info.file && info.fileList.length > 0) {
-      // 过滤新的file
-      let target = info.fileList.filter(e => {
-        return e.uid === info.file.uid;
-      });
-      // 获取base64用于页面显示图片
-      getBase64(target[0].originFileObj, imageUrl => {
-        this.state[url] = imageUrl;
-        this.setState({
-          loading: false
-        }, ()=>{console.log(this.state)});
-      });
-    }
-  };
-
-  // 处理 图片上传前
-  handleBeforeUpload = (fileList, file) => {
-    this.state[fileList] = [file];
-    return false;
-  };
-
-  handleChange = info => {
-    console.log("info", info);
-    if (info.file.status === "uploading") {
-      this.setState({ loading: true });
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl =>
-        this.setState({
-          imageUrl,
-          loading: false
-        })
-      );
-    }
-  };
-
   render() {
+    // 获取属性
     const { getFieldDecorator } = this.props.form;
+    const { backgroundUrl, backgroundList, iconUrl, iconList } = this.state;
+    // 表单公用格式
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 }
     };
-    const uploadButton = (
-      <div>
-        <Icon type={this.state.loading ? "loading" : "plus"} />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    );
-    const imageUrl = this.state.imageUrl;
-    const { uploading, backgroundUrl, backgroundList } = this.state;
-    const props = {
+    // 头像图片的属性
+    const iconProps = {
       action: "",
+      name: "avatar",
+      listType: "picture-card",
+      className: "avatar-uploader",
+      showUploadList: false,
       onRemove: file => {
-        // 移除现有的file
-        this.setState(({ fileList }) => {
-          const index = fileList.indexOf(file);
-          const newFileList = fileList.slice();
-          newFileList.splice(index, 1);
-          return {
-            backgroundUrl: null,
-            backgroundList: newFileList
-          };
-        });
+        this.handleOnRemove(file, iconList, iconUrl, "iconList", "iconUrl");
       },
       beforeUpload: file => {
-        // 设置新的fileList(单个file)
-        this.setState({ backgroundList: [file] });
+        this.handleBeforeUpload(file, "iconList");
+        // !!! 阻止自动上传 !!!
+        return false;
+      },
+      onChange: info => {
+        this.handleOnChange(info, "iconUrl");
+      },
+      fileList: this.state.iconList
+    };
+    // 背景图片的属性
+    const backgroundProps = {
+      action: "",
+      onRemove: file => {
+        this.handleOnRemove(
+          file,
+          backgroundList,
+          backgroundUrl,
+          "backgroundList",
+          "backgroundUrl"
+        );
+      },
+      beforeUpload: file => {
+        this.handleBeforeUpload(file, "backgroundList");
+        // !!! 阻止自动上传 !!!
         return false;
       },
       onChange: info => {
@@ -143,6 +93,8 @@ class BookCategoryUpdatePage extends React.Component {
       },
       fileList: this.state.backgroundList
     };
+
+    // 渲染Dom
     return (
       <Form onSubmit={this.handleSubmit}>
         {/*分类名称*/}
@@ -166,17 +118,11 @@ class BookCategoryUpdatePage extends React.Component {
 
         {/*图标*/}
         <FormItem {...formItemLayout} label="图标">
-          <Upload
-            name="avatar"
-            listType="picture-card"
-            className="avatar-uploader"
-            showUploadList={false}
-            action="//jsonplaceholder.typicode.com/posts/"
-            beforeUpload={beforeUpload}
-            onChange={this.handleChange}
-          >
-            {imageUrl ? <img src={imageUrl} alt="avatar" /> : uploadButton}
-          </Upload>
+          {getFieldDecorator("icon", {})(
+            <Upload {...iconProps}>
+              {iconUrl ? <img src={iconUrl} alt="icon" /> : this.ButtonUpload()}
+            </Upload>
+          )}
         </FormItem>
 
         <Divider dashed />
@@ -184,13 +130,11 @@ class BookCategoryUpdatePage extends React.Component {
         {/*背景图片*/}
         <FormItem {...formItemLayout} label="背景图片">
           {getFieldDecorator("background", {})(
-            <Upload {...props}>
+            <Upload {...backgroundProps}>
               {backgroundUrl ? (
-                <img src={backgroundUrl} alt="avatar" />
+                <img src={backgroundUrl} alt="background" />
               ) : (
-                <Button>
-                  <Icon type="upload" /> Select File
-                </Button>
+                this.ButtonAdd()
               )}
             </Upload>
           )}
@@ -240,6 +184,109 @@ class BookCategoryUpdatePage extends React.Component {
       </Form>
     );
   }
+
+  // 页面方法 //////////////////////////////////////////////////////////
+  // - 处理提交
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
+      }
+    });
+  };
+
+  // - 处理 file 变化
+  handleOnChange = (info, url) => {
+    if (info.file && info.fileList.length > 0) {
+      if (this.testFile(info.file)) {
+        // 过滤新的file
+        let target = info.fileList.filter(e => {
+          return e.uid === info.file.uid;
+        });
+        // 获取base64用于页面显示图片
+        GET_BASE64(target[0].originFileObj, imageUrl => {
+          this.state[url] = imageUrl;
+          this.setState(
+            {
+              loading: false
+            },
+            () => {
+              console.log(this.state);
+            }
+          );
+        });
+      }
+    }
+  };
+
+  // - 处理 file 上传前
+  handleBeforeUpload = (file, fileList) => {
+    // 设置新的fileList(单个file)
+    if (this.testFile(file, true)) {
+      this.state[fileList] = [file];
+    }
+  };
+
+  // 处理 file 移除
+  handleOnRemove = (
+    file,
+    targetList,
+    target,
+    targetListVariate,
+    targetVariate
+  ) => {
+    // 移除现有的file
+    const index = targetList.indexOf(file);
+    const newFileList = targetList.slice();
+    newFileList.splice(index, 1);
+    this.state[targetListVariate] = newFileList;
+    this.state[targetVariate] = null;
+  };
+
+  // 检测图片是否符合要求
+  testFile = (file, silence) => {
+    const isFormated = ALLOW_IMAGE_FORMAT_LIST.includes(file.type);
+    if (!isFormated) {
+      if (silence) {
+        message.error(
+          "图片格式错误!允许的格式为：" + ALLOW_IMAGE_FORMAT_LIST.join(",")
+        );
+      }
+      return false;
+    }
+    const isLt = file.size < ALLOW_IMAGE_SIZE;
+    if (!isLt) {
+      if (silence) {
+        message.error(
+          "Image must smaller than " + ALLOW_IMAGE_SIZE / 1024 / 1024 + "MB!"
+        );
+      }
+      return false;
+    }
+    return true;
+  };
+  // 页面方法 End //////////////////////////////////////////////////////////
+
+  // Dom组件 //////////////////////////////////////////////////////////
+  // - 头像的按钮
+  ButtonUpload = () => {
+    return (
+      <div>
+        <Icon type={this.state.loading ? "loading" : "plus"} />
+        <div className="ant-upload-text">Upload</div>
+      </div>
+    );
+  };
+  // - 背景的按钮
+  ButtonAdd = () => {
+    return (
+      <Button>
+        <Icon type="upload" /> Select File
+      </Button>
+    );
+  };
+  // Dom组件 End //////////////////////////////////////////////////////////
 }
 
 const WrappedBookCategoryUpdatePage = Form.create()(BookCategoryUpdatePage);
