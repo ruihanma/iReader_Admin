@@ -11,14 +11,14 @@ import {
   message
 } from "antd";
 // 工具
-import { GET_BASE64 } from "../../static/utils";
+import { GET_BASE64 } from "../../utils";
 // 配置信息
-import {
-  ALLOW_IMAGE_FORMAT_LIST,
-  ALLOW_IMAGE_SIZE
-} from "../../static/utils/config";
-import API from "../../static/utils/api";
-import request from "../../static/utils/request";
+import { ALLOW_IMAGE_FORMAT_LIST, ALLOW_IMAGE_SIZE } from "../../utils/config";
+import API from "../../utils/api";
+import request from "../../utils/request";
+
+// 插件
+import _ from "lodash";
 
 // 定义组件
 const FormItem = Form.Item;
@@ -75,7 +75,8 @@ class BookCategoryUpdatePage extends React.Component {
     };
     // 背景图片的属性
     const backgroundProps = {
-      action: "",
+      action: API.base + API.book.category.update,
+      name: "background",
       onRemove: file => {
         this.handleOnRemove(
           file,
@@ -114,6 +115,25 @@ class BookCategoryUpdatePage extends React.Component {
               }
             ]
           })(<Input placeholder="请输入分类名称" id="title" />)}
+        </FormItem>
+
+        <Divider dashed />
+
+        {/*分类名称 英文*/}
+        <FormItem {...formItemLayout} label="分类英文名称">
+          {getFieldDecorator("title_en", {
+            validateFirst: true,
+            rules: [
+              {
+                required: true,
+                message: "必需填写分类名称"
+              },
+              {
+                max: 50,
+                message: "名称最长为50位"
+              }
+            ]
+          })(<Input placeholder="请输入分类的英文名称" id="title_en" />)}
         </FormItem>
 
         <Divider dashed />
@@ -173,7 +193,20 @@ class BookCategoryUpdatePage extends React.Component {
             <TextArea
               rows={2}
               autosize={{ minRows: 2, maxRows: 4 }}
-              placeholder="Autosize height with minimum and maximum number of lines"
+              placeholder="请输入简介"
+            />
+          )}
+        </FormItem>
+
+        <Divider dashed />
+
+        {/*简介*/}
+        <FormItem {...formItemLayout} label="英文简介">
+          {getFieldDecorator("intro_en", { initialRows: 4 })(
+            <TextArea
+              rows={2}
+              autosize={{ minRows: 2, maxRows: 4 }}
+              placeholder="请输入英文简介"
             />
           )}
         </FormItem>
@@ -194,12 +227,31 @@ class BookCategoryUpdatePage extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        // 处理图片
+        if (values.icon && values.icon.fileList) {
+          values.icon = values.icon.fileList[0].originFileObj;
+        }
+        if (values.background && values.background.fileList) {
+          values.background = values.background.fileList[0].originFileObj;
+        }
+        // 设置图片的存储路径
+        values.iconPath = "/book/category/icon";
+        values.backgroundPath = "/book/category/background";
         request(API.base + API.book.category.update, {
           method: "POST",
           body: values
-        }).then(res => {
-          console.log("res", res);
-        });
+        })
+          .then(res => {
+            console.log("res", res);
+            if (res.status === 200) {
+              message.success(res.message);
+            } else {
+              message.error(res.message);
+            }
+          })
+          .catch(err => {
+            message.error(err);
+          });
       }
     });
   };
