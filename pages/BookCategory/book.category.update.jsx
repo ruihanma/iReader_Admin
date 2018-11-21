@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
   Form,
   InputNumber,
@@ -11,9 +11,9 @@ import {
   message
 } from "antd";
 // 工具
-import { GET_BASE64 } from "../../utils";
+import {GET_BASE64} from "../../utils";
 // 配置信息
-import { ALLOW_IMAGE_FORMAT_LIST, ALLOW_IMAGE_SIZE } from "../../utils/config";
+import {ALLOW_IMAGE_FORMAT_LIST, ALLOW_IMAGE_SIZE} from "../../utils/config";
 import API from "../../utils/api";
 import request from "../../utils/request";
 
@@ -22,7 +22,7 @@ import _ from "lodash";
 
 // 定义组件
 const FormItem = Form.Item;
-const { TextArea } = Input;
+const {TextArea} = Input;
 
 class BookCategoryUpdatePage extends React.Component {
   static group = "book";
@@ -33,30 +33,45 @@ class BookCategoryUpdatePage extends React.Component {
 
     this.state = {
       // 背景预览图url
-      backgroundUrl: null,
+      backgroundUrl: this.props.source && this.props.source.background ? "http://localhost:3001" + this.props.source.background : null,
       backgroundList: [],
       // 图标预览url
-      iconUrl: null,
+      iconUrl: this.props.source && this.props.source.icon ? "http://localhost:3001" + this.props.source.icon : null,
       iconList: [],
 
       loading: false,
-      uploading: false
+      uploading: false,
+
+      // 用户编辑的元数据
+      source: this.props.source ? this.props.source : null
     };
+
+    console.log('update.props', this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // console.log('update.nextProps', nextProps);
+    if (nextProps.source !== this.props.source) {
+      this.setState({source: nextProps.source})
+    }
   }
 
   render() {
+    // 获取元数据
+    const {source} = this.state;
     // 获取属性
-    const { getFieldDecorator } = this.props.form;
-    const { backgroundUrl, backgroundList, iconUrl, iconList } = this.state;
+    const {getFieldDecorator} = this.props.form;
+    const {backgroundUrl, backgroundList, iconUrl, iconList} = this.state;
     // 表单公用格式
     const formItemLayout = {
-      labelCol: { span: 6 },
-      wrapperCol: { span: 14 }
+      labelCol: {span: 6},
+      wrapperCol: {span: 14}
     };
     // 头像图片的属性
     const iconProps = {
+      initialValue: iconUrl,
       action: "",
-      name: "avatar",
+      name: "icon",
       listType: "picture-card",
       className: "avatar-uploader",
       showUploadList: false,
@@ -75,7 +90,7 @@ class BookCategoryUpdatePage extends React.Component {
     };
     // 背景图片的属性
     const backgroundProps = {
-      action: API.base + API.book.category.update,
+      initialValue: backgroundUrl,
       name: "background",
       onRemove: file => {
         this.handleOnRemove(
@@ -104,6 +119,7 @@ class BookCategoryUpdatePage extends React.Component {
         <FormItem {...formItemLayout} label="分类名称">
           {getFieldDecorator("title", {
             validateFirst: true,
+            initialValue: source && source.title ? source.title : null,
             rules: [
               {
                 required: true,
@@ -114,15 +130,16 @@ class BookCategoryUpdatePage extends React.Component {
                 message: "名称最长为10位"
               }
             ]
-          })(<Input placeholder="请输入分类名称" id="title" />)}
+          })(<Input placeholder="请输入分类名称" id="title"/>)}
         </FormItem>
 
-        <Divider dashed />
+        <Divider dashed/>
 
         {/*分类名称 英文*/}
         <FormItem {...formItemLayout} label="分类英文名称">
           {getFieldDecorator("title_en", {
             validateFirst: true,
+            initialValue: source && source.title_en ? source.title_en : null,
             rules: [
               {
                 required: true,
@@ -133,28 +150,28 @@ class BookCategoryUpdatePage extends React.Component {
                 message: "名称最长为50位"
               }
             ]
-          })(<Input placeholder="请输入分类的英文名称" id="title_en" />)}
+          })(<Input placeholder="请输入分类的英文名称" id="title_en"/>)}
         </FormItem>
 
-        <Divider dashed />
+        <Divider dashed/>
 
         {/*图标*/}
         <FormItem {...formItemLayout} label="图标">
           {getFieldDecorator("icon", {})(
             <Upload {...iconProps}>
-              {iconUrl ? <img src={iconUrl} alt="icon" /> : this.ButtonUpload()}
+              {iconUrl ? <img src={iconUrl} alt="icon"/> : this.ButtonUpload()}
             </Upload>
           )}
         </FormItem>
 
-        <Divider dashed />
+        <Divider dashed/>
 
         {/*背景图片*/}
         <FormItem {...formItemLayout} label="背景图片">
           {getFieldDecorator("background", {})(
             <Upload {...backgroundProps}>
               {backgroundUrl ? (
-                <img src={backgroundUrl} alt="background" />
+                <img className={"img-thumbnail"} src={backgroundUrl} alt="background"/>
               ) : (
                 this.ButtonAdd()
               )}
@@ -162,17 +179,17 @@ class BookCategoryUpdatePage extends React.Component {
           )}
         </FormItem>
 
-        <Divider dashed />
+        <Divider dashed/>
 
         {/*是否开放*/}
         <FormItem {...formItemLayout} label="开放">
           {getFieldDecorator("open", {
             valuePropName: "checked",
-            initialValue: true
-          })(<Switch />)}
+            initialValue: source && source.open ? source.open : false,
+          })(<Switch/>)}
         </FormItem>
 
-        <Divider dashed />
+        <Divider dashed/>
 
         {/*排序*/}
         <FormItem
@@ -181,37 +198,43 @@ class BookCategoryUpdatePage extends React.Component {
           help="默认100 数值越大越靠后"
         >
           {getFieldDecorator("sort", {
-            initialValue: 100
-          })(<InputNumber min={1} max={10000} />)}
+            initialValue: source && source.sort ? source.sort : 100,
+          })(<InputNumber min={1} max={10000}/>)}
         </FormItem>
 
-        <Divider dashed />
+        <Divider dashed/>
 
         {/*简介*/}
         <FormItem {...formItemLayout} label="简介">
-          {getFieldDecorator("intro", { initialRows: 4 })(
+          {getFieldDecorator("intro", {
+            initialValue: source && source.intro ? source.intro : null,
+            initialRows: 4
+          })(
             <TextArea
               rows={2}
-              autosize={{ minRows: 2, maxRows: 4 }}
+              autosize={{minRows: 2, maxRows: 4}}
               placeholder="请输入简介"
             />
           )}
         </FormItem>
 
-        <Divider dashed />
+        <Divider dashed/>
 
         {/*简介*/}
         <FormItem {...formItemLayout} label="英文简介">
-          {getFieldDecorator("intro_en", { initialRows: 4 })(
+          {getFieldDecorator("intro_en", {
+            initialValue: source && source.intro_en ? source.intro_en : null,
+            initialRows: 4
+          })(
             <TextArea
               rows={2}
-              autosize={{ minRows: 2, maxRows: 4 }}
+              autosize={{minRows: 2, maxRows: 4}}
               placeholder="请输入英文简介"
             />
           )}
         </FormItem>
 
-        <FormItem wrapperCol={{ span: 12, offset: 6 }}>
+        <FormItem wrapperCol={{span: 12, offset: 6}}>
           <Button type="primary" htmlType="submit">
             提交
           </Button>
@@ -224,19 +247,33 @@ class BookCategoryUpdatePage extends React.Component {
   // - 处理提交
   handleSubmit = e => {
     e.preventDefault();
+    const {source} = this.state;
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+
+        if (this.state.source._id) {
+          Object.assign(values, {id: source._id})
+        }
+
         // 处理图片
         if (values.icon && values.icon.fileList) {
           values.icon = values.icon.fileList[0].originFileObj;
         }
+        else {
+          values.icon = source.icon
+        }
         if (values.background && values.background.fileList) {
           values.background = values.background.fileList[0].originFileObj;
+        }
+        else{
+          values.background = source.background
         }
         // 设置图片的存储路径
         values.iconPath = "/book/category/icon";
         values.backgroundPath = "/book/category/background";
+
+        console.log("Received values of form: ", values);
         request(API.base + API.book.category.update, {
           method: "POST",
           body: values
@@ -289,13 +326,11 @@ class BookCategoryUpdatePage extends React.Component {
   };
 
   // 处理 file 移除
-  handleOnRemove = (
-    file,
-    targetList,
-    target,
-    targetListVariate,
-    targetVariate
-  ) => {
+  handleOnRemove = (file,
+                    targetList,
+                    target,
+                    targetListVariate,
+                    targetVariate) => {
     // 移除现有的file
     const index = targetList.indexOf(file);
     const newFileList = targetList.slice();
@@ -333,7 +368,7 @@ class BookCategoryUpdatePage extends React.Component {
   ButtonUpload = () => {
     return (
       <div>
-        <Icon type={this.state.loading ? "loading" : "plus"} />
+        <Icon type={this.state.loading ? "loading" : "plus"}/>
         <div className="ant-upload-text">Upload</div>
       </div>
     );
@@ -342,7 +377,7 @@ class BookCategoryUpdatePage extends React.Component {
   ButtonAdd = () => {
     return (
       <Button>
-        <Icon type="upload" /> Select File
+        <Icon type="upload"/> Select File
       </Button>
     );
   };

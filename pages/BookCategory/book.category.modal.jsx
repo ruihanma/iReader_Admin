@@ -1,7 +1,10 @@
 import {Modal} from 'antd';
 
+import UpdateComponent from "./book.category.update";
+
 class LocalizedModal extends React.Component {
   state = {
+    source: this.props.source ? this.props.source : null,
     visible: this.props.visible ? this.props.visible : false,
     toggleVisible: this.props.toggleVisible ? this.props.toggleVisible : () => {
     },
@@ -9,21 +12,24 @@ class LocalizedModal extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // console.log("modal.nextProps", nextProps)
-    if(nextProps.visible !== this.props.visible){
-      this.setState({visible: nextProps.visible})
+    if (nextProps.visible !== this.props.visible && nextProps.source !== this.props.source) {
+      this.setState({visible: nextProps.visible, source: nextProps.source}, () => {
+        console.log("modal.state", this.state)
+      })
     }
-
   }
 
   hideModal = () => {
     this.setState({
       visible: false,
+      source: null
     }, () => {
       this.state.toggleVisible(false)
     });
   };
 
   render() {
+    const {source} = this.state;
     return (
       <div>
         {/*<Button type="primary" onClick={this.showModal}>Modal</Button>*/}
@@ -34,10 +40,10 @@ class LocalizedModal extends React.Component {
           onCancel={this.hideModal}
           okText="确认"
           cancelText="取消"
+          width="1000px"
+          destroyOnClose={true}
         >
-          <p>Bla bla ...</p>
-          <p>Bla bla ...</p>
-          <p>Bla bla ...</p>
+          <UpdateComponent source={source}/>
         </Modal>
       </div>
     );

@@ -63,13 +63,13 @@ class BookCategoryListPage extends React.Component {
         title: "Action",
         key: "action",
         render: (text, record) => (
-          <span>
-          <a onClick={() => {
-            this.toggleModal(true)
-          }}>编辑</a>
-          <Divider type="vertical"/>
-          <a href="javascript:">删除</a>
-      </span>
+          <div>
+            <span className="btn btn-primary btn-sm" onClick={() => {
+              this.toggleModal(true, record)
+            }}>编辑</span>
+            <Divider type="vertical"/>
+            <span className="btn btn-danger btn-sm">删除</span>
+          </div>
         )
       }
     ];
@@ -77,7 +77,9 @@ class BookCategoryListPage extends React.Component {
     this.state = {
       data: [],
       // 编辑模态窗的状态
-      visible: false
+      visible: false,
+      // 被编辑的数据
+      editing: null
     };
 
     // this.toggleModal = this.toggleModal.bind(this)
@@ -88,11 +90,11 @@ class BookCategoryListPage extends React.Component {
   }
 
   render() {
-    const {data, visible} = this.state;
+    const {data, visible, editing} = this.state;
     return (
       <Fragment>
-        <Table columns={this.columns} dataSource={data}/>
-        <Modal visible={visible} toggleVisible={() => this.toggleModal(visible)}/>
+        <Table columns={this.columns} dataSource={data} rowKey={(record) => record._id}/>
+        <Modal source={editing} visible={visible} toggleVisible={() => this.toggleModal()}/>
       </Fragment>
     )
   }
@@ -118,9 +120,10 @@ class BookCategoryListPage extends React.Component {
   };
 
   // 打开模态窗
-  toggleModal(visible) {
+  toggleModal(visible, record) {
     this.setState({
-      visible
+      visible,
+      editing: record
     });
   }
 }
