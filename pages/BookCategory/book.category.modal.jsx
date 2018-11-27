@@ -8,42 +8,50 @@ class LocalizedModal extends React.Component {
     visible: this.props.visible ? this.props.visible : false,
     toggleVisible: this.props.toggleVisible ? this.props.toggleVisible : () => {
     },
+    edited: null
   };
 
   componentWillReceiveProps(nextProps) {
     // console.log("modal.nextProps", nextProps)
     if (nextProps.visible !== this.props.visible && nextProps.source !== this.props.source) {
       this.setState({visible: nextProps.visible, source: nextProps.source}, () => {
-        console.log("modal.state", this.state)
+        // console.log("modal.state", this.state)
       })
     }
   }
 
-  hideModal = () => {
+  hideModal = (data) => {
+    // console.log('data', data);
     this.setState({
       visible: false,
-      source: null
+      source: null,
     }, () => {
-      this.state.toggleVisible(false)
+      if (data && typeof data === 'object') {
+        // 清空掉父级的editing 将更新的数据传回
+        // console.log("this.state", this.state)
+
+        this.props.toggleVisible(false, null, data);
+      }
+      else {
+        this.props.toggleVisible(false);
+      }
+      // console.log("this.state", this.state)
     });
   };
 
   render() {
-    const {source} = this.state;
+    const {source, visible} = this.state;
     return (
       <div>
-        {/*<Button type="primary" onClick={this.showModal}>Modal</Button>*/}
         <Modal
-          title="Modal"
-          visible={this.state.visible}
-          onOk={this.hideModal}
-          onCancel={this.hideModal}
-          okText="确认"
-          cancelText="取消"
+          title={this.props.source ? `编辑分类 - ` + this.props.source.title : `编辑`}
+          visible={visible}
+          onCancel={() => this.hideModal()}
+          footer={null}
           width="1000px"
           destroyOnClose={true}
         >
-          <UpdateComponent source={source}/>
+          <UpdateComponent onSubmit={this.hideModal} source={source}/>
         </Modal>
       </div>
     );

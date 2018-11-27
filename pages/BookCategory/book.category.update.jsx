@@ -266,7 +266,7 @@ class BookCategoryUpdatePage extends React.Component {
         if (values.background && values.background.fileList) {
           values.background = values.background.fileList[0].originFileObj;
         }
-        else{
+        else {
           values.background = source.background
         }
         // 设置图片的存储路径
@@ -282,6 +282,10 @@ class BookCategoryUpdatePage extends React.Component {
             console.log("res", res);
             if (res.status === 200) {
               message.success(res.message);
+              this.props.onSubmit(res.content)
+              // setTimeout(() => {
+              //   window.location.reload()
+              // }, 1500)
             } else {
               message.error(res.message);
             }

@@ -79,10 +79,12 @@ class BookCategoryListPage extends React.Component {
       // 编辑模态窗的状态
       visible: false,
       // 被编辑的数据
-      editing: null
+      editing: null,
+      // 编辑完的数据
+      edited: null
     };
 
-    // this.toggleModal = this.toggleModal.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   componentDidMount() {
@@ -94,7 +96,7 @@ class BookCategoryListPage extends React.Component {
     return (
       <Fragment>
         <Table columns={this.columns} dataSource={data} rowKey={(record) => record._id}/>
-        <Modal source={editing} visible={visible} toggleVisible={() => this.toggleModal()}/>
+        <Modal source={editing} visible={visible} toggleVisible={this.toggleModal}/>
       </Fragment>
     )
   }
@@ -120,11 +122,35 @@ class BookCategoryListPage extends React.Component {
   };
 
   // 打开模态窗
-  toggleModal(visible, record) {
+  toggleModal(visible, record, nextRecord) {
+    const {data} = this.state;
     this.setState({
       visible,
-      editing: record
+      editing: record,
+    }, () => {
+      if (nextRecord && typeof nextRecord === 'object') {
+        // console.log('nextRecord', nextRecord);
+        this.replaceFilterData(data, nextRecord)
+      }
+
     });
+  }
+
+  // 替换被修改的数据
+  replaceFilterData(array, data) {
+
+    let _array = array;
+    let i = null;
+    if (_array && Array.isArray(_array)) {
+      i = _array.findIndex(e => {
+        return e._id === data._id
+      });
+      if (i >= 0) {
+        _array.splice(i, 1);
+        _array.push(data);
+        this.setState({data: _array})
+      }
+    }
   }
 }
 
