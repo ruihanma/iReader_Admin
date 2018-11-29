@@ -20,7 +20,9 @@ app.prepare()
     server.get('/book/categories', (req, res) => {
       return app.render(req, res, '/book/category', req.query);
     });
-
+    server.get('/book/authors', (req, res) => {
+      return app.render(req, res, '/book/author', req.query);
+    });
 
 
     server.get('*', (req, res) => {

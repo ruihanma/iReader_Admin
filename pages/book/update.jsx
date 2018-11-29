@@ -27,7 +27,7 @@ class BookCreatePage extends React.Component {
         console.log('Received values of form: ', values);
       }
     });
-  }
+  };
 
   normFile = (e) => {
     console.log('Upload event:', e);

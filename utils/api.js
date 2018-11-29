@@ -1,22 +1,29 @@
 "use strict";
 
 // 接口
-let base    = "http://localhost:3001",
-    api     = "/api";
+let base = "http://localhost:3001",
+  api = "/api";
 
 const API = {
-    base: base,
+  base: base,
 
-    book: {
-        category: {
+  book: {
+    category: {
 
-            list:   api + "/book/category/list",
+      list: api + "/book/category/list",
 
-            update: api + "/book/category/update",
+      update: api + "/book/category/update",
 
-            del:    api + "/book/category/del",
-        }
+      del: api + "/book/category/del",
+    },
+    author: {
+      list: api + "/book/author/list",
+
+      update: api + "/book/author/update",
+
+      del: api + "/book/author/del",
     }
-}
+  }
+};
 
 export default API
