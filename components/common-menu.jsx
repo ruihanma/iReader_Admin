@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { Menu, Icon } from "antd";
+import {Menu, Icon} from "antd";
 
-const { SubMenu } = Menu;
+const {SubMenu} = Menu;
 
 class CommonMenu extends React.Component {
   render() {
-    const { openKey, openGroup } = this.props;
+    const {openKey, openGroup} = this.props;
     return (
       <Menu
         theme="dark"
@@ -18,7 +18,7 @@ class CommonMenu extends React.Component {
           key="dashboard"
           title={
             <span>
-              <Icon type="dashboard" />
+              <Icon type="dashboard"/>
                 <span>Dashboard</span>
             </span>
           }
@@ -33,37 +33,27 @@ class CommonMenu extends React.Component {
           key="book"
           title={
             <span>
-              <Icon type="book" />
+              <Icon type="book"/>
                 <span>漫画</span>
             </span>
           }
         >
           <Menu.Item key="book.list">
-            <Link prefetch as={"/book/list"} href="/book.list">
-              <a>漫画列表</a>
+            <Link prefetch as={"/books"} href="/book">
+              <span>漫画列表</span>
             </Link>
           </Menu.Item>
-          <Menu.Item key="book.create">
-            <Link prefetch as={"/book/create"} href="/book.create">
-              <a>创建漫画</a>
+          <Menu.Item key="book.category.list">
+            <Link prefetch as={"/book/categories"} href="/book/category">
+              <span>分类列表</span>
             </Link>
           </Menu.Item>
-            <Menu.Item key="book.category.list">
-                <Link prefetch as={"/book/category/list"} href="/BookCategory/book.category.list">
-                    <a>分类列表</a>
-                </Link>
-            </Menu.Item>
-            <Menu.Item key="book.category.update">
-                <Link prefetch as={"/book/category/update"} href="/BookCategory/book.category.update">
-                    <a>创建分类</a>
-                </Link>
-            </Menu.Item>
         </SubMenu>
         <SubMenu
           key="user"
           title={
             <span>
-              <Icon type="user" />
+              <Icon type="user"/>
                 <span>用户</span>
             </span>
           }
@@ -78,7 +68,7 @@ class CommonMenu extends React.Component {
           key="admin"
           title={
             <span>
-              <Icon type="robot" />
+              <Icon type="robot"/>
                 <span>管理员</span>
             </span>
           }
