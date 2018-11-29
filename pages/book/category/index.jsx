@@ -97,6 +97,9 @@ class BookCategoryListPage extends React.Component {
     const {data, visible, editing} = this.state;
     return (
       <Fragment>
+        <div className="mb-3">
+          <button onClick={() => this.setState({visible: true})} className="btn btn-sm btn-primary">添加</button>
+        </div>
         <Table columns={this.columns} dataSource={data} rowKey={(record) => record._id}/>
         <Modal source={editing} visible={visible} toggleVisible={this.toggleModal}>
           <UpdateComponent onSubmit={this.toggleModal} source={editing} />

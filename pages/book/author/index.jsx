@@ -150,7 +150,6 @@ class BookAuthorListPage extends React.Component {
 
   // 替换被修改的数据
   replaceFilterData(array, data) {
-
     let _array = array;
     let i = null;
     if (_array && Array.isArray(_array)) {
@@ -162,7 +161,7 @@ class BookAuthorListPage extends React.Component {
         _array.push(data);
         this.setState({data: _array})
       }
-      else{
+      else {
         _array.push(data);
         this.setState({data: _array})
       }
