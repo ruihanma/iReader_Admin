@@ -22,10 +22,6 @@ app.prepare()
     });
 
 
-    server.get('/book/category/update', (req, res) => {
-      return app.render(req, res, '/BookCategory/book.category.update', req.query);
-    });
-
 
     server.get('*', (req, res) => {
       return handle(req, res)
