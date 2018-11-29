@@ -111,21 +111,21 @@ class BookCategoryUpdatePage extends React.Component {
 
         <Divider dashed/>
 
-        {/*/!*分类名称 英文*!/*/}
-        {/*<FormItem {...formItemLayout} label="英文名称">*/}
-          {/*{getFieldDecorator("name_en", {*/}
-            {/*validateFirst: true,*/}
-            {/*initialValue: source && source.name_en ? source.name_en : null,*/}
-            {/*rules: [*/}
-              {/*{*/}
-                {/*max: 50,*/}
-                {/*message: "名称最长为50位"*/}
-              {/*}*/}
-            {/*]*/}
-          {/*})(<Input placeholder="请输入英文名称" id="name_en"/>)}*/}
-        {/*</FormItem>*/}
+        {/*分类名称 英文*/}
+        <FormItem {...formItemLayout} label="英文名称">
+          {getFieldDecorator("name_en", {
+            validateFirst: true,
+            initialValue: source && source.name_en ? source.name_en : null,
+            rules: [
+              {
+                max: 50,
+                message: "名称最长为50位"
+              }
+            ]
+          })(<Input placeholder="请输入英文名称" id="name_en"/>)}
+        </FormItem>
 
-        {/*<Divider dashed/>*/}
+        <Divider dashed/>
 
         {/*照片*/}
         <FormItem {...formItemLayout} label="照片">

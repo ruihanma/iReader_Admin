@@ -102,6 +102,9 @@ class BookAuthorListPage extends React.Component {
     const {data, visible, editing} = this.state;
     return (
       <Fragment>
+        <div className="mb-3">
+          <button onClick={() => this.setState({visible: true})} className="btn btn-sm btn-primary">添加</button>
+        </div>
         <Table columns={this.columns} dataSource={data} rowKey={(record) => record._id}/>
         <Modal source={editing} visible={visible} toggleVisible={this.toggleModal}>
           <UpdateComponent onSubmit={this.toggleModal} source={editing}/>
@@ -156,6 +159,10 @@ class BookAuthorListPage extends React.Component {
       });
       if (i >= 0) {
         _array.splice(i, 1);
+        _array.push(data);
+        this.setState({data: _array})
+      }
+      else{
         _array.push(data);
         this.setState({data: _array})
       }

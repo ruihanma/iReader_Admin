@@ -1,17 +1,24 @@
 import {Modal} from 'antd';
 
 class LocalizedModal extends React.Component {
-  state = {
-    source: this.props.source ? this.props.source : null,
-    visible: this.props.visible ? this.props.visible : false,
-    toggleVisible: this.props.toggleVisible ? this.props.toggleVisible : () => {
-    },
-    edited: null
-  };
+  constructor(props){
+    super(props);
+
+    this.state = {
+      source: this.props.source ? this.props.source : null,
+      visible: this.props.visible ? this.props.visible : false,
+      toggleVisible: this.props.toggleVisible ? this.props.toggleVisible : () => {
+      },
+      edited: null
+    };
+
+    // console.log('modal.props', this.props)
+  }
+
 
   componentWillReceiveProps(nextProps) {
     // console.log("modal.nextProps", nextProps)
-    if (nextProps.visible !== this.props.visible && nextProps.source !== this.props.source) {
+    if (nextProps.visible !== this.props.visible) {
       this.setState({visible: nextProps.visible, source: nextProps.source}, () => {
         // console.log("modal.state", this.state)
       })
