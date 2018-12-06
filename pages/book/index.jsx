@@ -130,7 +130,6 @@ class BookListPage extends React.Component {
 
   // 替换被修改的数据
   replaceFilterData(array, data) {
-
     let _array = array;
     let i = null;
     if (_array && Array.isArray(_array)) {
@@ -139,6 +138,7 @@ class BookListPage extends React.Component {
       });
       if (i >= 0) {
         _array.splice(i, 1);
+        data["thumbnail"] = data["thumbnail"] + "?" + Math.random();
         _array.push(data);
         this.setState({data: _array})
       }
