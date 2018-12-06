@@ -1,0 +1,663 @@
+[
+  {
+    "code": "US",
+    "name": "美国",
+    "native": "United States",
+    "phone": "1",
+    "continent": "NA",
+    "capital": "Washington D.C.",
+    "currency": "USD,USN,USS",
+    "languages": [
+      "en"
+    ],
+    "emoji": "🇺🇸",
+    "emojiU": "U+1F1FA U+1F1F8"
+  },
+  {
+    "code": "CN",
+    "name": "中国",
+    "native": "中国",
+    "phone": "86",
+    "continent": "AS",
+    "capital": "Beijing",
+    "currency": "CNY",
+    "languages": [
+      "zh"
+    ],
+    "emoji": "🇨🇳",
+    "emojiU": "U+1F1E8 U+1F1F3"
+  },
+  {
+    "code": "JP",
+    "name": "日本",
+    "native": "日本",
+    "phone": "81",
+    "continent": "AS",
+    "capital": "Tokyo",
+    "currency": "JPY",
+    "languages": [
+      "ja"
+    ],
+    "emoji": "🇯🇵",
+    "emojiU": "U+1F1EF U+1F1F5"
+  },
+  {
+    "code": "DE",
+    "name": "德国",
+    "native": "Deutschland",
+    "phone": "49",
+    "continent": "EU",
+    "capital": "Berlin",
+    "currency": "EUR",
+    "languages": [
+      "de"
+    ],
+    "emoji": "🇩🇪",
+    "emojiU": "U+1F1E9 U+1F1EA"
+  },
+  {
+    "code": "GB",
+    "name": "英国",
+    "native": "United Kingdom",
+    "phone": "44",
+    "continent": "EU",
+    "capital": "London",
+    "currency": "GBP",
+    "languages": [
+      "en"
+    ],
+    "emoji": "🇬🇧",
+    "emojiU": "U+1F1EC U+1F1E7"
+  },
+  {
+    "code": "IN",
+    "name": "印度",
+    "native": "भारत",
+    "phone": "91",
+    "continent": "AS",
+    "capital": "New Delhi",
+    "currency": "INR",
+    "languages": [
+      "hi",
+      "en"
+    ],
+    "emoji": "🇮🇳",
+    "emojiU": "U+1F1EE U+1F1F3"
+  },
+  {
+    "code": "FR",
+    "name": "法国",
+    "native": "France",
+    "phone": "33",
+    "continent": "EU",
+    "capital": "Paris",
+    "currency": "EUR",
+    "languages": [
+      "fr"
+    ],
+    "emoji": "🇫🇷",
+    "emojiU": "U+1F1EB U+1F1F7"
+  },
+  {
+    "code": "IT",
+    "name": "意大利",
+    "native": "Italia",
+    "phone": "39",
+    "continent": "EU",
+    "capital": "Rome",
+    "currency": "EUR",
+    "languages": [
+      "it"
+    ],
+    "emoji": "🇮🇹",
+    "emojiU": "U+1F1EE U+1F1F9"
+  },
+  {
+    "code": "BR",
+    "name": "巴西",
+    "native": "Brasil",
+    "phone": "55",
+    "continent": "SA",
+    "capital": "Brasília",
+    "currency": "BRL",
+    "languages": [
+      "pt"
+    ],
+    "emoji": "🇧🇷",
+    "emojiU": "U+1F1E7 U+1F1F7"
+  },
+  {
+    "code": "CA",
+    "name": "加拿大",
+    "native": "Canada",
+    "phone": "1",
+    "continent": "NA",
+    "capital": "Ottawa",
+    "currency": "CAD",
+    "languages": [
+      "en",
+      "fr"
+    ],
+    "emoji": "🇨🇦",
+    "emojiU": "U+1F1E8 U+1F1E6"
+  },
+  {
+    "code": "KR",
+    "name": "韩国",
+    "native": "대한민국",
+    "phone": "82",
+    "continent": "AS",
+    "capital": "Seoul",
+    "currency": "KRW",
+    "languages": [
+      "ko"
+    ],
+    "emoji": "🇰🇷",
+    "emojiU": "U+1F1F0 U+1F1F7"
+  },
+  {
+    "code": "ES",
+    "name": "西班牙",
+    "native": "España",
+    "phone": "34",
+    "continent": "EU",
+    "capital": "Madrid",
+    "currency": "EUR",
+    "languages": [
+      "es",
+      "eu",
+      "ca",
+      "gl",
+      "oc"
+    ],
+    "emoji": "🇪🇸",
+    "emojiU": "U+1F1EA U+1F1F8"
+  },
+  {
+    "code": "ID",
+    "name": "印度尼西亚",
+    "native": "Indonesia",
+    "phone": "62",
+    "continent": "AS",
+    "capital": "Jakarta",
+    "currency": "IDR",
+    "languages": [
+      "id"
+    ],
+    "emoji": "🇮🇩",
+    "emojiU": "U+1F1EE U+1F1E9"
+  },
+  {
+    "code": "NL",
+    "name": "荷兰",
+    "native": "Nederland",
+    "phone": "31",
+    "continent": "EU",
+    "capital": "Amsterdam",
+    "currency": "EUR",
+    "languages": [
+      "nl"
+    ],
+    "emoji": "🇳🇱",
+    "emojiU": "U+1F1F3 U+1F1F1"
+  },
+  {
+    "code": "TR",
+    "name": "土耳其",
+    "native": "Türkiye",
+    "phone": "90",
+    "continent": "AS",
+    "capital": "Ankara",
+    "currency": "TRY",
+    "languages": [
+      "tr"
+    ],
+    "emoji": "🇹🇷",
+    "emojiU": "U+1F1F9 U+1F1F7"
+  },
+  {
+    "code": "CH",
+    "name": "瑞士",
+    "native": "Schweiz",
+    "phone": "41",
+    "continent": "EU",
+    "capital": "Bern",
+    "currency": "CHE,CHF,CHW",
+    "languages": [
+      "de",
+      "fr",
+      "it"
+    ],
+    "emoji": "🇨🇭",
+    "emojiU": "U+1F1E8 U+1F1ED"
+  },
+  {
+    "code": "SA",
+    "name": "沙特阿拉伯",
+    "native": "العربية السعودية",
+    "phone": "966",
+    "continent": "AS",
+    "capital": "Riyadh",
+    "currency": "SAR",
+    "languages": [
+      "ar"
+    ],
+    "emoji": "🇸🇦",
+    "emojiU": "U+1F1F8 U+1F1E6"
+  },
+  {
+    "code": "AR",
+    "name": "阿根廷",
+    "native": "Argentina",
+    "phone": "54",
+    "continent": "SA",
+    "capital": "Buenos Aires",
+    "currency": "ARS",
+    "languages": [
+      "es",
+      "gn"
+    ],
+    "emoji": "🇦🇷",
+    "emojiU": "U+1F1E6 U+1F1F7"
+  },
+  {
+    "code": "PL",
+    "name": "波兰",
+    "native": "Polska",
+    "phone": "48",
+    "continent": "EU",
+    "capital": "Warsaw",
+    "currency": "PLN",
+    "languages": [
+      "pl"
+    ],
+    "emoji": "🇵🇱",
+    "emojiU": "U+1F1F5 U+1F1F1"
+  },
+  {
+    "code": "SE",
+    "name": "瑞典",
+    "native": "Sverige",
+    "phone": "46",
+    "continent": "EU",
+    "capital": "Stockholm",
+    "currency": "SEK",
+    "languages": [
+      "sv"
+    ],
+    "emoji": "🇸🇪",
+    "emojiU": "U+1F1F8 U+1F1EA"
+  },
+  {
+    "code": "NG",
+    "name": "尼日利亚",
+    "native": "Nigeria",
+    "phone": "234",
+    "continent": "AF",
+    "capital": "Abuja",
+    "currency": "NGN",
+    "languages": [
+      "en"
+    ],
+    "emoji": "🇳🇬",
+    "emojiU": "U+1F1F3 U+1F1EC"
+  },
+  {
+    "code": "BE",
+    "name": "比利时",
+    "native": "België",
+    "phone": "32",
+    "continent": "EU",
+    "capital": "Brussels",
+    "currency": "EUR",
+    "languages": [
+      "nl",
+      "fr",
+      "de"
+    ],
+    "emoji": "🇧🇪",
+    "emojiU": "U+1F1E7 U+1F1EA"
+  },
+  {
+    "code": "IR",
+    "name": "伊朗",
+    "native": "ایران",
+    "phone": "98",
+    "continent": "AS",
+    "capital": "Tehran",
+    "currency": "IRR",
+    "languages": [
+      "fa"
+    ],
+    "emoji": "🇮🇷",
+    "emojiU": "U+1F1EE U+1F1F7"
+  },
+  {
+    "code": "BV",
+    "name": "挪威",
+    "native": "Bouvetøya",
+    "phone": "47",
+    "continent": "AN",
+    "capital": "",
+    "currency": "NOK",
+    "languages": [
+      "no",
+      "nb",
+      "nn"
+    ],
+    "emoji": "🇧🇻",
+    "emojiU": "U+1F1E7 U+1F1FB"
+  },
+  {
+    "code": "TH",
+    "name": "泰国",
+    "native": "ประเทศไทย",
+    "phone": "66",
+    "continent": "AS",
+    "capital": "Bangkok",
+    "currency": "THB",
+    "languages": [
+      "th"
+    ],
+    "emoji": "🇹🇭",
+    "emojiU": "U+1F1F9 U+1F1ED"
+  },
+  {
+    "code": "AT",
+    "name": "奥地利",
+    "native": "Österreich",
+    "phone": "43",
+    "continent": "EU",
+    "capital": "Vienna",
+    "currency": "EUR",
+    "languages": [
+      "de"
+    ],
+    "emoji": "🇦🇹",
+    "emojiU": "U+1F1E6 U+1F1F9"
+  },
+  {
+    "code": "MY",
+    "name": "马来西亚",
+    "native": "Malaysia",
+    "phone": "60",
+    "continent": "AS",
+    "capital": "Kuala Lumpur",
+    "currency": "MYR",
+    "languages": [
+      "ms"
+    ],
+    "emoji": "🇲🇾",
+    "emojiU": "U+1F1F2 U+1F1FE"
+  },
+
+  {
+    "code": "AE",
+    "name": "阿拉伯联合酋长国",
+    "native": "دولة الإمارات العربية المتحدة",
+    "phone": "971",
+    "continent": "AS",
+    "capital": "Abu Dhabi",
+    "currency": "AED",
+    "languages": [
+      "ar"
+    ],
+    "emoji": "🇦🇪",
+    "emojiU": "U+1F1E6 U+1F1EA"
+  },
+  {
+    "code": "PH",
+    "name": "菲律宾",
+    "native": "Pilipinas",
+    "phone": "63",
+    "continent": "AS",
+    "capital": "Manila",
+    "currency": "PHP",
+    "languages": [
+      "en"
+    ],
+    "emoji": "🇵🇭",
+    "emojiU": "U+1F1F5 U+1F1ED"
+  },
+  {
+    "code": "ZA",
+    "name": "南非",
+    "native": "South Africa",
+    "phone": "27",
+    "continent": "AF",
+    "capital": "Pretoria",
+    "currency": "ZAR",
+    "languages": [
+      "af",
+      "en",
+      "nr",
+      "st",
+      "ss",
+      "tn",
+      "ts",
+      "ve",
+      "xh",
+      "zu"
+    ],
+    "emoji": "🇿🇦",
+    "emojiU": "U+1F1FF U+1F1E6"
+  },
+  {
+    "code": "SG",
+    "name": "新加坡",
+    "native": "Singapore",
+    "phone": "65",
+    "continent": "AS",
+    "capital": "Singapore",
+    "currency": "SGD",
+    "languages": [
+      "en",
+      "ms",
+      "ta",
+      "zh"
+    ],
+    "emoji": "🇸🇬",
+    "emojiU": "U+1F1F8 U+1F1EC"
+  },
+  {
+    "code": "IL",
+    "name": "以色列",
+    "native": "יִשְׂרָאֵל",
+    "phone": "972",
+    "continent": "AS",
+    "capital": "Jerusalem",
+    "currency": "ILS",
+    "languages": [
+      "he",
+      "ar"
+    ],
+    "emoji": "🇮🇱",
+    "emojiU": "U+1F1EE U+1F1F1"
+  },
+  {
+    "code": "DK",
+    "name": "丹麦",
+    "native": "Danmark",
+    "phone": "45",
+    "continent": "EU",
+    "capital": "Copenhagen",
+    "currency": "DKK",
+    "languages": [
+      "da"
+    ],
+    "emoji": "🇩🇰",
+    "emojiU": "U+1F1E9 U+1F1F0"
+  },
+  {
+    "code": "CO",
+    "name": "哥伦比亚",
+    "native": "Colombia",
+    "phone": "57",
+    "continent": "SA",
+    "capital": "Bogotá",
+    "currency": "COP",
+    "languages": [
+      "es"
+    ],
+    "emoji": "🇨🇴",
+    "emojiU": "U+1F1E8 U+1F1F4"
+  },
+  {
+    "code": "IE",
+    "name": "爱尔兰",
+    "native": "Éire",
+    "phone": "353",
+    "continent": "EU",
+    "capital": "Dublin",
+    "currency": "EUR",
+    "languages": [
+      "ga",
+      "en"
+    ],
+    "emoji": "🇮🇪",
+    "emojiU": "U+1F1EE U+1F1EA"
+  },
+  {
+    "code": "CL",
+    "name": "智利",
+    "native": "Chile",
+    "phone": "56",
+    "continent": "SA",
+    "capital": "Santiago",
+    "currency": "CLF,CLP",
+    "languages": [
+      "es"
+    ],
+    "emoji": "🇨🇱",
+    "emojiU": "U+1F1E8 U+1F1F1"
+  },
+  {
+    "code": "AX",
+    "name": "芬兰",
+    "native": "Åland",
+    "phone": "358",
+    "continent": "EU",
+    "capital": "Mariehamn",
+    "currency": "EUR",
+    "languages": [
+      "sv"
+    ],
+    "emoji": "🇦🇽",
+    "emojiU": "U+1F1E6 U+1F1FD"
+  },
+  {
+    "code": "BD",
+    "name": "孟加拉国",
+    "native": "Bangladesh",
+    "phone": "880",
+    "continent": "AS",
+    "capital": "Dhaka",
+    "currency": "BDT",
+    "languages": [
+      "bn"
+    ],
+    "emoji": "🇧🇩",
+    "emojiU": "U+1F1E7 U+1F1E9"
+  },
+  {
+    "code": "VN",
+    "name": "越南",
+    "native": "Việt Nam",
+    "phone": "84",
+    "continent": "AS",
+    "capital": "Hanoi",
+    "currency": "VND",
+    "languages": [
+      "vi"
+    ],
+    "emoji": "🇻🇳",
+    "emojiU": "U+1F1FB U+1F1F3"
+  },
+  {
+    "code": "QA",
+    "name": "卡塔尔",
+    "native": "قطر",
+    "phone": "974",
+    "continent": "AS",
+    "capital": "Doha",
+    "currency": "QAR",
+    "languages": [
+      "ar"
+    ],
+    "emoji": "🇶🇦",
+    "emojiU": "U+1F1F6 U+1F1E6"
+  },
+  {
+    "code": "PT",
+    "name": "葡萄牙",
+    "native": "Portugal",
+    "phone": "351",
+    "continent": "EU",
+    "capital": "Lisbon",
+    "currency": "EUR",
+    "languages": [
+      "pt"
+    ],
+    "emoji": "🇵🇹",
+    "emojiU": "U+1F1F5 U+1F1F9"
+  },
+  {
+    "code": "GR",
+    "name": "希腊",
+    "native": "Ελλάδα",
+    "phone": "30",
+    "continent": "EU",
+    "capital": "Athens",
+    "currency": "EUR",
+    "languages": [
+      "el"
+    ],
+    "emoji": "🇬🇷",
+    "emojiU": "U+1F1EC U+1F1F7"
+  },
+  {
+    "code": "IQ",
+    "name": "伊拉克",
+    "native": "العراق",
+    "phone": "964",
+    "continent": "AS",
+    "capital": "Baghdad",
+    "currency": "IQD",
+    "languages": [
+      "ar",
+      "ku"
+    ],
+    "emoji": "🇮🇶",
+    "emojiU": "U+1F1EE U+1F1F6"
+  },
+  {
+    "code": "CZ",
+    "name": "捷克共和国",
+    "native": "Česká republika",
+    "phone": "420",
+    "continent": "EU",
+    "capital": "Prague",
+    "currency": "CZK",
+    "languages": [
+      "cs",
+      "sk"
+    ],
+    "emoji": "🇨🇿",
+    "emojiU": "U+1F1E8 U+1F1FF"
+  },
+  {
+    "code": "KZ",
+    "name": "哈萨克斯坦",
+    "native": "Қазақстан",
+    "phone": "76,77",
+    "continent": "AS",
+    "capital": "Astana",
+    "currency": "KZT",
+    "languages": [
+      "kk",
+      "ru"
+    ],
+    "emoji": "🇰🇿",
+    "emojiU": "U+1F1F0 U+1F1FF"
+  }
+]

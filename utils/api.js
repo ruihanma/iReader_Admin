@@ -8,6 +8,12 @@ const API = {
   base: base,
 
   book: {
+    list: api + "/book/list",
+
+    update: api + "/book/update",
+
+    del: api + "/book/del",
+
     category: {
 
       list: api + "/book/category/list",
