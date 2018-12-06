@@ -40,6 +40,8 @@ class BookCreatePage extends React.Component {
       source: this.props.source ? this.props.source : null
     }
 
+    console.log("book.update.props", this.props);
+
   }
 
   componentDidMount() {
@@ -165,7 +167,7 @@ class BookCreatePage extends React.Component {
           label="地区"
         >
           {getFieldDecorator('origins', {
-            initialValue: source && source.categories ? source.categories : [],
+            initialValue: source && source.origins ? source.origins : [],
             rules: [
               {required: true, message: 'Please select your favourite colors!', type: 'array'},
             ],
@@ -326,7 +328,7 @@ class BookCreatePage extends React.Component {
             console.log("res", res);
             if (res.status === 200) {
               message.success(res.message);
-              // this.props.onSubmit(false, null, res.content)
+              this.props.onSubmit(false, null, res.content)
               // setTimeout(() => {
               //   window.location.reload()
               // }, 1500)

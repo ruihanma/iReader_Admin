@@ -49,10 +49,7 @@ export default function request(url, options) {
         reqOptions.method = "POST";
         let fm = new FormData();
         forIn(mergedOptions.body, function(value, key) {
-            // console.log('value', value);
-            // console.log('key', key);
             if(Array.isArray(value)){
-              // delete mergedOptions.body[key];
               for (let i = 0; i < value.length; i++) {
                 fm.append(`${key}[]`, value[i]);
               }
