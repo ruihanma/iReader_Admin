@@ -313,7 +313,7 @@ class BookCreatePage extends React.Component {
           values.thumbnail = values.thumbnail.fileList[0].originFileObj;
         }
         else {
-          values.thumbnail = source && source.thumbnail ? source.thumbnail : null
+          values.thumbnail = source && source.thumbnail ? source.thumbnail : ''
         }
 
         // 设置图片的存储路径

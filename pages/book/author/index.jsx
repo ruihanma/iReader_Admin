@@ -158,6 +158,7 @@ class BookAuthorListPage extends React.Component {
       });
       if (i >= 0) {
         _array.splice(i, 1);
+        data["avatar"] = data["avatar"] !== "" && data["avatar"] + "?" + Math.random();
         _array.push(data);
         this.setState({data: _array})
       }

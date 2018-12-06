@@ -43,11 +43,6 @@ class CommonMenu extends React.Component {
               <a>漫画列表</a>
             </Link>
           </Menu.Item>
-          <Menu.Item key="book.update">
-            <Link prefetch as={"/book/update"} href="/book/update">
-              <a>漫画添加</a>
-            </Link>
-          </Menu.Item>
           <Menu.Item key="book.author.list">
             <Link prefetch as={"/book/authors"} href="/book/author">
               <a>作者列表</a>

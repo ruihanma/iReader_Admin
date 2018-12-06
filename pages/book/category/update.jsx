@@ -119,7 +119,7 @@ class BookCategoryUpdatePage extends React.Component {
         <FormItem {...formItemLayout} label="分类名称">
           {getFieldDecorator("title", {
             validateFirst: true,
-            initialValue: source && source.title ? source.title : null,
+            initialValue: source && source.title ? source.title : "",
             rules: [
               {
                 required: true,
@@ -139,7 +139,7 @@ class BookCategoryUpdatePage extends React.Component {
         <FormItem {...formItemLayout} label="分类英文名称">
           {getFieldDecorator("title_en", {
             validateFirst: true,
-            initialValue: source && source.title_en ? source.title_en : null,
+            initialValue: source && source.title_en ? source.title_en : "",
             rules: [
               {
                 required: true,
@@ -207,7 +207,7 @@ class BookCategoryUpdatePage extends React.Component {
         {/*简介*/}
         <FormItem {...formItemLayout} label="简介">
           {getFieldDecorator("intro", {
-            initialValue: source && source.intro ? source.intro : null,
+            initialValue: source && source.intro ? source.intro : "",
             initialRows: 4
           })(
             <TextArea
@@ -223,7 +223,7 @@ class BookCategoryUpdatePage extends React.Component {
         {/*简介*/}
         <FormItem {...formItemLayout} label="英文简介">
           {getFieldDecorator("intro_en", {
-            initialValue: source && source.intro_en ? source.intro_en : null,
+            initialValue: source && source.intro_en ? source.intro_en : "",
             initialRows: 4
           })(
             <TextArea
@@ -252,7 +252,7 @@ class BookCategoryUpdatePage extends React.Component {
       if (!err) {
         console.log("Received values of form: ", values);
 
-        if (this.state.source._id) {
+        if (source && source._id) {
           Object.assign(values, {id: source._id})
         }
 
@@ -261,13 +261,13 @@ class BookCategoryUpdatePage extends React.Component {
           values.icon = values.icon.fileList[0].originFileObj;
         }
         else {
-          values.icon = source.icon
+          values.icon = source && source.icon ? source.icon : ""
         }
         if (values.background && values.background.fileList) {
           values.background = values.background.fileList[0].originFileObj;
         }
         else {
-          values.background = source.background
+          values.background = source && source.background ? source.background : ""
         }
         // 设置图片的存储路径
         values.iconPath = "/book/category/icon";

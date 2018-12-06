@@ -48,7 +48,10 @@ class BookListPage extends React.Component {
     return (
       <Fragment>
         <div>
-          <button type="button" className="btn btn-sm btn-primary">添加漫画</button>
+          <button onClick={() => {
+            this.toggleModal(true, null)
+          }} type="button" className="btn btn-sm btn-primary">添加漫画
+          </button>
         </div>
         <List
           itemLayout="vertical"
@@ -57,7 +60,7 @@ class BookListPage extends React.Component {
             onChange: (page) => {
               console.log(page);
             },
-            pageSize: 3,
+            pageSize: 5,
           }}
           dataSource={data}
           footer={<div><b>ant design</b> footer part</div>}
@@ -68,12 +71,15 @@ class BookListPage extends React.Component {
                 <IconText type="star-o" text="156"/>,
                 <IconText type="like-o" text="156"/>,
                 <IconText type="message" text="2"/>,
-                <Button type="primary" onClick={() => {
-                  this.toggleModal(true, item)}}>编辑</Button>
-
+                <button className="btn btn-sm btn-primary"
+                        onClick={() => this.toggleModal(true, item)}
+                >编辑</button>,
+                <button className="btn btn-sm btn-info"
+                        onClick={() => this.toggleModal(true, item)}
+                >添加章节</button>
               ]}
-              extra={<img width={272} alt="logo"
-                          src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"/>}
+              extra={<img height={200} alt="thumbnail"
+                          src={item.thumbnail ? "http://localhost:3001" + item.thumbnail : ''}/>}
             >
               <List.Item.Meta
                 avatar={<Avatar src={item.thumbnail}/>}
@@ -138,7 +144,11 @@ class BookListPage extends React.Component {
       });
       if (i >= 0) {
         _array.splice(i, 1);
-        data["thumbnail"] = data["thumbnail"] + "?" + Math.random();
+        data["thumbnail"] = data["thumbnail"] !== "" && data["thumbnail"] + "?" + Math.random();
+        _array.push(data);
+        this.setState({data: _array})
+      }
+      else {
         _array.push(data);
         this.setState({data: _array})
       }

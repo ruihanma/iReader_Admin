@@ -154,6 +154,12 @@ class BookCategoryListPage extends React.Component {
       });
       if (i >= 0) {
         _array.splice(i, 1);
+        data["icon"] = data["icon"] !== "" && data["icon"] + "?" + Math.random();
+        data["background"] = data["background"] !== "" && data["background"] + "?" + Math.random();
+        _array.push(data);
+        this.setState({data: _array})
+      }
+      else{
         _array.push(data);
         this.setState({data: _array})
       }

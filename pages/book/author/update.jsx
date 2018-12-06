@@ -95,7 +95,7 @@ class BookCategoryUpdatePage extends React.Component {
         <FormItem {...formItemLayout} label="本名">
           {getFieldDecorator("name", {
             validateFirst: true,
-            initialValue: source && source.name ? source.name : null,
+            initialValue: source && source.name ? source.name : "",
             rules: [
               {
                 required: true,
@@ -115,7 +115,7 @@ class BookCategoryUpdatePage extends React.Component {
         <FormItem {...formItemLayout} label="英文名称">
           {getFieldDecorator("name_en", {
             validateFirst: true,
-            initialValue: source && source.name_en ? source.name_en : null,
+            initialValue: source && source.name_en ? source.name_en : "",
             rules: [
               {
                 max: 50,
@@ -177,7 +177,7 @@ class BookCategoryUpdatePage extends React.Component {
         {/*简介*/}
         <FormItem {...formItemLayout} label="简介">
           {getFieldDecorator("intro", {
-            initialValue: source && source.intro ? source.intro : null,
+            initialValue: source && source.intro ? source.intro : "",
             initialRows: 4
           })(
             <TextArea
@@ -231,7 +231,7 @@ class BookCategoryUpdatePage extends React.Component {
           values.avatar = values.avatar.fileList[0].originFileObj;
         }
         else {
-          values.avatar = source && source.avatar ? source.avatar : null
+          values.avatar = source && source.avatar ? source.avatar : ""
         }
 
         // 设置图片的存储路径
