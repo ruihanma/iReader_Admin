@@ -29,6 +29,28 @@ class CommonMenu extends React.Component {
             </Link>
           </Menu.Item>
         </SubMenu>
+
+        <SubMenu
+          key="project"
+          title={
+            <span>
+              <Icon type="book"/>
+                <span>项目</span>
+            </span>
+          }
+        >
+          <Menu.Item key="project.list">
+            <Link prefetch as={"/project"} href="/project">
+              <a>项目列表</a>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="project.category.list">
+            <Link prefetch as={"/project/category"} href="/project/category">
+              <a>项目分类列表</a>
+            </Link>
+          </Menu.Item>
+        </SubMenu>
+
         <SubMenu
           key="book"
           title={
