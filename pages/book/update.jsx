@@ -59,7 +59,7 @@ class BookCreatePage extends React.Component {
 
   render() {
     // 获取元数据
-    const {source} = this.state;
+    const {source} = this.props;
     const {getFieldDecorator} = this.props.form;
     const {thumbnailUrl, thumbnailList} = this.state;
     const formItemLayout = {

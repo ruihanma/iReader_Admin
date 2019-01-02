@@ -8,6 +8,8 @@ import request from "../../utils/request";
 // Components
 import Modal from "../../components/Modal";
 import UpdateComponent from "./update";
+// Plugins
+import _ from "lodash"
 
 
 const IconText = ({type, text}) => (
@@ -82,7 +84,6 @@ class BookListPage extends React.Component {
                           src={item.thumbnail ? "http://localhost:3001" + item.thumbnail : ''}/>}
             >
               <List.Item.Meta
-                avatar={<Avatar src={item.thumbnail}/>}
                 title={<a href={item.href}>{item.title}</a>}
                 description={item.intro}
               />
@@ -101,23 +102,57 @@ class BookListPage extends React.Component {
 
   // 请求书籍
   requestBooks = () => {
+    let data;
+    const that = this;
     request(API.base + API.book.list)
       .then(res => {
         console.log("res", res);
         if (res.status === 200) {
           message.success(res.message);
 
-          this.setState({
-            data: res.content
-          });
+          data = res.content;
+
+          return data
+
         } else {
           message.error(res.message);
         }
+      })
+      .then(res => {
+        that.handlePopulateData(data, "categories");
+        that.handlePopulateData(data, "authors");
+        return res
+      })
+      .then(res => {
+        this.setState({
+          data: data
+        }, () => {
+          console.log(this.state)
+        });
       })
       .catch(err => {
         message.error(err);
       });
   };
+
+  // 处理populate数据
+  handlePopulateData(array, column) {
+    _.each(array, (item, ii) => {
+      let tmp = [];
+      _.each(item[column], (val, vi) => {
+        tmp.push(val._id);
+
+        if (vi === item[column].length - 1) {
+          item["_" + column] = tmp
+        }
+      });
+
+      if (ii === array.length - 1) {
+
+      }
+    })
+
+  }
 
   // 打开模态窗
   toggleModal(visible, record, nextRecord) {
