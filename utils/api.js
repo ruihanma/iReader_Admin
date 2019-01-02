@@ -7,6 +7,17 @@ let base = "http://localhost:3001",
 const API = {
   base: base,
 
+  project: {
+    category: {
+
+      list: api + "/project/category/list",
+
+      update: api + "/project/category/update",
+
+      del: api + "/project/category/del",
+    },
+  },
+
   book: {
     list: api + "/book/list",
 
